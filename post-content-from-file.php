@@ -13,7 +13,11 @@ Author URI: http://www.jon-long.ca
 
 $upload_dir_arr = wp_upload_dir();
 
-$pcff_base_dir = $upload_dir_arr['basedir'] . '/post-content-from-file';
+$pcff_dir_name = 'post-content-from-file';
+
+$pcff_base_dir = $upload_dir_arr['basedir'] . '/' . $pcff_dir_name;
+
+$pcff_base_url = $upload_dir_arr['baseurl'] . '/' . $pcff_dir_name;
 
 function post_content_from_file_shortcode( $atts ) {
 
@@ -41,6 +45,15 @@ function post_content_from_file_shortcode( $atts ) {
 add_shortcode( 'post_content_from_file', 'post_content_from_file_shortcode');
 
 add_shortcode( 'pcff', 'post_content_from_file_shortcode');
+
+function pcffuri_shortcode( $atts ) {
+
+	global $pcff_base_url;
+
+	return $pcff_base_url;
+}
+
+add_shortcode( 'pcffuri', 'pcffuri_shortcode' );
 
 
 /**
